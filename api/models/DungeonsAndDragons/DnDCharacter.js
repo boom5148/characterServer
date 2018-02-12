@@ -1,6 +1,3 @@
-module.exports = (modelConstructor, SchemaConstructor) => {
-    let DnDCharacterSchema = SchemaConstructor({
-        
-    })
-    return modelConstructor('DnDCharacter', DnDCharacterSchema)
-};
+module.exports = (schemaFactory) => {
+    return schemaFactory.create()
+}
