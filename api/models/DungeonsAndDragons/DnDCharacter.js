@@ -1,5 +1,6 @@
-var mongoose = require("mongoose");
-
-var DnDCharacterSchema = new mongoose.Schema({
-
-});
+module.exports = (modelConstructor, SchemaConstructor) => {
+    let DnDCharacterSchema = SchemaConstructor({
+        
+    })
+    return modelConstructor('DnDCharacter', DnDCharacterSchema)
+};
