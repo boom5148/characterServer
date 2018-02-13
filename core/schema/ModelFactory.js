@@ -14,7 +14,7 @@ module.exports = {
      * @param{string} name - the name of the model. The name must be singular (i.e. Car, not Cars)
      * @param{obecjt} the schema params for the model. http://mongoosejs.com/docs/guide.html
      */
-    create = (name, schemaParams) => {
+    create : (name, schemaParams) => {
         let schema = new mongoose.Schema(schemaParams)
         return mongoose.model(name, schema);
     }
