@@ -1,51 +1,94 @@
-model.exports = (Model) => {
-    let BasicCollectionController = {};
-    BasicCollectionController.all = (request, response) => {
-        Model.find({}, (err, model) => {
-            if(err){
-                response.send(err);
-            } else {
-                response.json(model);
-            }
-        })
+model.exports = (function(){
+
+  let _Model = new Symbol();
+  
+  return class BasicCollectionController {
+    /**
+     * A simple controller to handle collections of a Model
+     * @param {*} Model - The model this collection is managing
+     */
+    constructor(Model) {
+      this[_Model] = Model;
     }
 
-    BasicCollectionController.create = (request, response) => {
-        let newCharacter = new Model(request.body);
-        newCharacter.save((err, model) => {
-            if(err){
-                response.send(err);
-            } else {
-                response.json(model);
-            }
-        })
-    }
-    
-    BasicCollectionController.getSingle = (request, response) => {
-        Model.findById(request.params.characterId, (err, model) => {
-          if (err)
-            response.send(err);
+    /**
+     * Ger all instances of a model in a collection
+     * @param {*} request
+     * @param {*} response
+     */
+    all(request, response) {
+      this[_Model].find({}, (err, model) => {
+        if (err) {
+          response.send(err);
+        } else {
           response.json(model);
-        });
-    };
-    
-    
-    exports.update = (request, res) => {
-        //whats with the new : true ? whats with the underscore id?
-        Model.findOneAndUpdate({ _id: request.params.characterId}, request.body, {new: true}, (err, model) => {
-            if (err) {
-                res.send(err);
-            } else {
-                res.json(model);
-            }
-        });
-    };
-    
-    exports.delete = (request, response) => {
-        Model.remove( { _id : request.params.characterId }, (err, model) => {
-            if(err){
-                response.send(err);
-            }
-        });
+        }
+      });
     }
-}
+
+    /**
+     * Create a new instance of model in the collection. The response contains the newly created model.
+     * @param {*} request
+     * @param {*} response
+     */
+    create(request, response) {
+      let newCharacter = new this[_Model](request.body);
+      newCharacter.save((err, model) => {
+        if (err) {
+          response.send(err);
+        } else {
+          response.json(model);
+        }
+      });
+    }
+
+    /**
+     * Get a single
+     * @param {*} request - should contain a params object containing the id, i.e ```{params : { id : 'thisId'}}
+     * @param {*} response
+     */
+    getSingle(request, response) {
+      this[_Model].findById(request.params.id, (err, model) => {
+        if (err) response.send(err);
+        response.json(model);
+      });
+    }
+
+    /**
+     * Get a single
+     * @param {*} request - should contain a params object containing the id, i.e ```{params : { id : 'thisId'}}
+     * @param {*} response
+     */
+    update(request, res) {
+      //whats with the new : true ? whats with the underscore id?
+      this[_Model].findOneAndUpdate(
+        { _id: request.params.id },
+        request.body,
+        { new: true },
+        (err, model) => {
+          if (err) {
+            res.send(err);
+          } else {
+            res.json(model);
+          }
+        }
+      );
+    }
+
+    /**
+     * delete a single
+     * @param {*} request - should contain a params object containing the id, i.e ```{params : { id : 'thisId'}}
+     * @param {*} response
+     */
+    delete(request, response) {
+      this[_Model].remove({ _id: request.params.id }, (err, model) => {
+        if (err) {
+          response.send(err);
+        } else {
+          //TODO: send deleted item?
+          response.json({ message: "Character Deleted" });
+        }
+      });
+    }
+  };
+}());
