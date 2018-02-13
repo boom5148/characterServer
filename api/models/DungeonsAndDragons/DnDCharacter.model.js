@@ -1,6 +1,6 @@
 var ModelFactory = require("../../../core/schema/ModelFactory");
 var mongoose = require("mongoose");
-let shadowrunCharacterModel = ModelFactory.create('srCharacter',{
+let dndCharacterModel = ModelFactory.create('DnDCharacter',{
     name : {
         type : String,
         require : true
@@ -28,4 +28,4 @@ let shadowrunCharacterModel = ModelFactory.create('srCharacter',{
         }
     }],
 });
-module.exports = shadowrunCharacterModel;
+module.exports = dndCharacterModel;
