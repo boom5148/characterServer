@@ -12,7 +12,7 @@ let bodyParser = require("body-parser");
 
 
 //mongoose instance connection url connection
-mongoose.connect('mongodb://localhost/Characterdb');
+mongoose.connect('mongodb://localhost/Characterdb', { useMongoClient: true });
 
 //whats the prupose of that object that we are passing in there?
 expressServer.use(bodyParser.urlencoded({ extended : true }));

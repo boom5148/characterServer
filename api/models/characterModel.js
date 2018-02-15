@@ -1,3 +1,4 @@
+//TODO: refactor me out
 var mongoose = require('mongoose');
 
 var CharacterSchema = new mongoose.Schema({
