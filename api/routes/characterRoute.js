@@ -8,20 +8,20 @@ module.exports = (app) => {
     let srCharacterController = new BasicCollectionController(srCharacter);
 
     app.route('/dnd/characters')
-        .get(dndCharacterController.all)
-        .post(dndCharacterController.create);
+        .get(dndCharacterController.all.bind(dndCharacterController))
+        .post(dndCharacterController.create.bind(dndCharacterController));
 
     app.route('/dnd/characters/:id')
-        .get(dndCharacterController.getSingle)
-        .put(dndCharacterController.update)
-        .delete(dndCharacterController.delete);
+        .get(dndCharacterController.getSingle.bind(dndCharacterController))
+        .put(dndCharacterController.update.bind(dndCharacterController))
+        .delete(dndCharacterController.delete.bind(dndCharacterController));
 
     app.route('/sr/characters')
-        .get(srCharacterController.all)
-        .post(srCharacterController.create);
+        .get(srCharacterController.all.bind(srCharacterController))
+        .post(srCharacterController.create.bind(srCharacterController));
 
     app.route('/sr/characters/:id')
-        .get(srCharacterController.getSingle)
-        .put(srCharacterController.update)
-        .delete(srCharacterController.delete);
+        .get(srCharacterController.getSingle.bind(srCharacterController))
+        .put(srCharacterController.update.bind(srCharacterController))
+        .delete(srCharacterController.delete.bind(srCharacterController));
 };

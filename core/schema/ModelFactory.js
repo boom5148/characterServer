@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
  * 
  * Creates
 */
-module.exports = class ModelFactory{
+class ModelFactory{
     /** 
      * ModelFactory
      * 
@@ -27,3 +27,4 @@ module.exports = class ModelFactory{
         return mongoose.model(name, schema);
     }
 }
+module.exports = ModelFactory;

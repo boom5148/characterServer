@@ -1,8 +1,7 @@
-model.exports = (function(){
+  //I want this to be a Symbol, but I could not get it to work
+  let _Model = "_Model";
 
-  let _Model = new Symbol();
-  
-  return class BasicCollectionController {
+  class BasicCollectionController {
     /**
      * A simple controller to handle collections of a Model
      * @param {*} Model - The model this collection is managing
@@ -91,4 +90,5 @@ model.exports = (function(){
       });
     }
   };
-}());
+
+module.exports = BasicCollectionController;

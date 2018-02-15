@@ -1,5 +1,6 @@
 var ModelFactory = require("../../../core/schema/ModelFactory");
 var mongoose = require("mongoose");
+console.log(mongoose)
 let shadowrunCharacterModel = ModelFactory.create('srCharacter',{
     name : {
         type : String,
@@ -12,18 +13,18 @@ let shadowrunCharacterModel = ModelFactory.create('srCharacter',{
             default : 1
         },
         attributeDeclaration : {
-            type : mongoose.Types.ObjectId,
+            type : mongoose.Schema.Types.ObjectId,
             required : true
         }
     }],
     skills : [{
-        name : string,
+        name : String,
         baseValue : {
             type : Number,
             default : 1
         },
         attributeDeclaration : {
-            type : mongoose.Types.ObjectId,
+            type : mongoose.Schema.Types.ObjectId,
             required : true
         }
     }],

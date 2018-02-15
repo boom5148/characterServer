@@ -12,18 +12,18 @@ let dndCharacterModel = ModelFactory.create('DnDCharacter',{
             default : 1
         },
         attributeDeclaration : {
-            type : mongoose.Types.ObjectId,
+            type : mongoose.Schema.Types.ObjectId,
             required : true
         }
     }],
     skills : [{
-        name : string,
+        name : String,
         baseValue : {
             type : Number,
             default : 1
         },
         attributeDeclaration : {
-            type : mongoose.Types.ObjectId,
+            type : mongoose.Schema.Types.ObjectId,
             required : true
         }
     }],
